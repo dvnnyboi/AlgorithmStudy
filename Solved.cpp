@@ -346,3 +346,53 @@ int main() {
 
 
 #endif
+
+// 18110 : solved.ac
+#if 0
+#include <bits/stdc++.h> 
+using namespace std;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+	int n;
+	cin >> n;
+
+	int offsetVal = (int)round(n * 0.15f);
+	int total = 0;
+	vector<int> countScores(31, 0);
+	for (int i = 0; i < n; i++) {
+		int score;
+		cin >> score;
+		countScores[score]++;
+		total += score;
+	}
+
+	int temp = offsetVal;
+	int idx = 1;
+	while (temp) {
+		if (countScores[idx] > 0) {
+			countScores[idx]--;
+			temp--;
+			total -= idx;
+		}
+		else idx++;
+	}
+
+	temp = offsetVal;
+	idx = 30;
+	while (temp) {
+		if (countScores[idx] > 0) {
+			countScores[idx]--;
+			temp--;
+			total -= idx;
+		}
+		else idx--;
+	}
+
+	if (n == 0) cout << n;
+
+	else cout << (int)round(total / (n - 2 * offsetVal * 1.00f));
+
+	return 0;
+}
+#endif
