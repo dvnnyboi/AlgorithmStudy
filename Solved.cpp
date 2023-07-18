@@ -396,3 +396,40 @@ int main() {
 	return 0;
 }
 #endif
+
+// 9375 : 패션왕 신해빈 (수학 - 조합)
+#if 0
+#include <bits/stdc++.h> 
+#include <unordered_map>	// stdc++.h 에 없음!
+using namespace std;
+
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+	int t, n;
+
+	cin >> t;
+
+	while (t--) {
+		cin >> n;
+
+		unordered_map<string, int> outfits;
+		pair<string, string> ootd;
+		for (int i = 0; i < n; i++) {
+			cin >> ootd.first >> ootd.second;
+			outfits[ootd.second]++;
+		}
+
+		int combinations = 1;
+		for (auto& iter : outfits) {
+			combinations *= iter.second + 1;
+		}
+		combinations--;
+
+		cout << combinations << '\n';
+	}
+
+
+	return 0;
+}
+#endif
