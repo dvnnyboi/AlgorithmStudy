@@ -433,3 +433,43 @@ int main() {
 	return 0;
 }
 #endif
+
+// 17626 : Four Squares (DP)
+#if 0
+#include <bits/stdc++.h> 
+using namespace std;
+
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	int n;
+
+	cin >> n;
+
+	vector<int> dp(n + 1, 4);
+	dp[0] = 0;
+	dp[1] = 1;
+	dp[2] = 2;
+	dp[3] = 3;
+
+	for (int i = 4; i <= n; i++) {
+		int maxRoot = (int)sqrt(i);
+		if (maxRoot * maxRoot == i) {
+			dp[i] = 1;
+		}
+		else {
+			int minCnt = 5;
+			for (int j = maxRoot; j > 0; j--) {
+				int remaining = i - j * j;
+				minCnt = min(minCnt, dp[remaining]);
+			}
+			dp[i] = minCnt + 1;
+		}
+	}
+	cout << dp[n];
+
+
+	return 0;
+}
+#endif
