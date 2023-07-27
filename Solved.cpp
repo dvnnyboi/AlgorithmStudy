@@ -534,7 +534,7 @@ int main() {
 }
 #endif
 
-//1389 : 케빈 베이컨의 6단계 법칙 (Floyd-Warshall)
+// 1389 : 케빈 베이컨의 6단계 법칙 (Floyd-Warshall)
 #if 0
 #include <bits/stdc++.h> 
 using namespace std;
@@ -585,6 +585,62 @@ int main() {
 	}
 
 	cout << idx;
+
+	return 0;
+}
+#endif
+
+// 5525 : IOIOI (문자열)
+#if 0
+#include <bits/stdc++.h> 
+using namespace std;
+
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	int n, m;
+	string s;
+
+	cin >> n >> m >> s;
+
+	int cnt = 0;
+	int repCnt = 0;
+	int idx = 0;
+	while (idx < m - 2) {
+		if (s[idx] == 'O') idx++;
+		else {
+			if (s.substr(idx, 3) == "IOI") {
+				repCnt++;
+				if (repCnt == n) {
+					cnt++;
+					repCnt--;
+				}
+				idx += 2;
+			}
+			else {
+				repCnt = 0;
+				idx++;
+			}
+		}
+	}
+
+	// 50점 - 시간초과
+	/*for (int i = 0; i < m ; i++) {
+		if (i + n * 2 >= m) break;
+		if (s[i] == 'O') continue;
+		int left = i;
+		int right = i + n * 2;
+		char prev = 'O';
+		while (left <= right && s[left] == s[right] && s[left] != prev) {
+			prev = s[left];
+			left++;
+			right--;
+		}
+		if (left > right) cnt++;
+	}*/
+
+	cout << cnt;
 
 	return 0;
 }
