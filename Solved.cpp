@@ -347,7 +347,7 @@ int main() {
 
 #endif
 
-// 18110 : solved.ac
+// 18110 : solved.ac (수학)
 #if 0
 #include <bits/stdc++.h> 
 using namespace std;
@@ -469,6 +469,122 @@ int main() {
 	}
 	cout << dp[n];
 
+
+	return 0;
+}
+#endif
+
+// 21736 : 헌내기는 친구가 필요해 (BFS)
+#if 0
+#include <bits/stdc++.h> 
+using namespace std;
+
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	int dx[4] = { 0, -1, 0, 1 };
+	int dy[4] = { 1, 0, -1, 0 };
+
+	// N, M 입력
+	int n, m;
+	cin >> n >> m;
+
+	vector<vector<bool>> visited(n, vector<bool>(m, false));
+
+	// 캠퍼스 정보 입력, 도연이 위치 기록
+	vector<string> board(n);
+	pair<int, int> doYeon;
+	for (int i = 0; i < n; i++) {
+		cin >> board[i];
+		if (board[i].find("I") != -1) {
+			doYeon = { i, board[i].find("I") };
+		}
+	}
+
+	int friendCnt = 0;
+	queue<pair<int, int>> q;
+
+	q.push(doYeon);
+	visited[doYeon.first][doYeon.second] = true;
+
+	while (!q.empty()) {
+		int x = q.front().first;
+		int y = q.front().second;
+		q.pop();
+
+		for (int i = 0; i < 4; i++) {
+			int nx = x + dx[i];
+			int ny = y + dy[i];
+
+			if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
+			if (visited[nx][ny] || board[nx][ny] == 'X') continue;
+
+			if (board[nx][ny] == 'P') friendCnt++;
+			q.push({ nx, ny });
+			visited[nx][ny] = true;
+		}
+	}
+
+	if (friendCnt) cout << friendCnt;
+	else cout << "TT";
+
+
+	return 0;
+}
+#endif
+
+//1389 : 케빈 베이컨의 6단계 법칙 (Floyd-Warshall)
+#if 0
+#include <bits/stdc++.h> 
+using namespace std;
+
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	int n, m;
+	cin >> n >> m;
+
+	vector<vector<int>> baconNums(n + 1, vector<int>(n + 1, 2e9));
+	for (int i = 1; i <= n; i++) baconNums[i][i] = 0;
+
+	int a, b;
+	for (int i = 0; i < m; i++) {
+		cin >> a >> b;
+		baconNums[a][b] = 1;
+		baconNums[b][a] = 1;
+	}
+
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= n; j++) {
+			if (j == i) continue;
+			for (int k = 1; k <= n; k++) {
+				if (k == i || k == j) continue;
+				if (baconNums[j][i] < 2e9 && baconNums[i][k] < 2e9)
+					baconNums[j][k] = min(baconNums[j][k], baconNums[j][i] + baconNums[i][k]);
+			}
+		}
+	}
+
+	for (int i = 0; i <= n; i++) {
+		for (int j = 0; j <= n; j++) {
+			if (baconNums[i][j] == 2e9) baconNums[i][j] = 0;
+		}
+	}
+
+	vector<int> sumBacon(n + 1);
+	int smallest = 2e9;
+	int idx;
+	for (int i = 1; i <= n; i++) {
+		int tmp = accumulate(baconNums[i].begin(), baconNums[i].end(), 0);
+		if (tmp < smallest) {
+			smallest = tmp;
+			idx = i;
+		}
+	}
+
+	cout << idx;
 
 	return 0;
 }

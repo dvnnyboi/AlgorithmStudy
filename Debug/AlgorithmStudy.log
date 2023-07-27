@@ -1,2 +1,8 @@
 ﻿  Solving.cpp
+D:\AlgorithmStudy\Solving.cpp(11,58): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+D:\AlgorithmStudy\Solving.cpp(39,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   AlgorithmStudy.vcxproj -> D:\AlgorithmStudy\Debug\AlgorithmStudy.exe
