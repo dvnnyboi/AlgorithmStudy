@@ -646,7 +646,7 @@ int main() {
 }
 #endif
 
-// 11286 : Àý´ñ°ª Èü
+// 11286 : Àý´ñ°ª Èü (¿ì¼±¼øÀ§ Å¥)
 #if 0
 #include <bits/stdc++.h> 
 using namespace std;
@@ -677,6 +677,57 @@ int main() {
 		}
 		else pq.push(temp);
 	}
+
+	return 0;
+}
+#endif
+
+// 11403 : °æ·Î Ã£±â (±×·¡ÇÁ Å½»ö (Floyd-Warshallµµ °¡´É))
+#if 0
+#include <bits/stdc++.h> 
+using namespace std;
+
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	int n;
+	cin >> n;
+
+	vector<vector<bool>> board(n, vector<bool>(n, false));
+	vector<vector<int>> adjacent(n);
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			int tmp;
+			cin >> tmp;
+			board[i][j] = tmp;
+			if (tmp) adjacent[i].push_back(j);
+		}
+	}
+
+	for (int i = 0; i < n; i++) {
+		vector<bool> visited(n, false);
+		queue<int> q;
+		for (int x : adjacent[i]) q.push(x);
+		while (!q.empty()) {
+			int nx = q.front();
+			q.pop();
+			visited[nx] = true;
+			board[i][nx] = 1;
+			for (int x : adjacent[nx]) {
+				if (!visited[x]) q.push(x);
+			}
+		}
+
+	}
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			cout << board[i][j] << " ";
+		}
+		cout << '\n';
+	}
+
 
 	return 0;
 }
