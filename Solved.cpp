@@ -732,3 +732,46 @@ int main() {
 	return 0;
 }
 #endif
+
+// 20529 : 가장 가까운 세 사람의 심리적 거리
+#if 0
+#include <bits/stdc++.h> 
+using namespace std;
+
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	int t;
+	cin >> t;
+	while (t--) {
+		int n;
+		cin >> n;
+
+		vector<string> mbti(n);
+		for (int i = 0; i < n; i++) cin >> mbti[i];
+
+		if (n > 32) cout << 0;
+		else {
+			vector<vector<int>> dist(n, vector<int>(n, 0));
+			int minDist = 2e9;
+			for (int i = 0; i < n - 2; i++) {
+				for (int j = i + 1; j < n - 1; j++) {
+					for (int k = j + 1; k < n; k++) {
+						int personalDist = 0;
+						for (int idx = 0; idx < 4; idx++) {
+							if (mbti[i][idx] != mbti[j][idx]) personalDist++;
+							if (mbti[i][idx] != mbti[k][idx]) personalDist++;
+							if (mbti[j][idx] != mbti[k][idx]) personalDist++;
+						}
+						minDist = min(minDist, personalDist);
+					}
+				}
+			}
+			cout << minDist;
+		}
+		cout << '\n';
+	}
+	return 0;
+}
+#endif
