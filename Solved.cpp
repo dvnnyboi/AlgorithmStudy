@@ -775,3 +775,107 @@ int main() {
 	return 0;
 }
 #endif
+
+// 피로도
+#if 0
+#include <bits/stdc++.h> 
+using namespace std;
+
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	int a, b, c, m;
+	cin >> a >> b >> c >> m;
+
+	int work = 0;
+	int fatigue = 0;
+
+	for (int i = 0; i < 24; i++) {
+		if (fatigue <= m - a) {
+			fatigue += a;
+			work += b;
+		}
+		else {
+			fatigue = max(fatigue - c, 0);
+		}
+	}
+
+	cout << work;
+
+	return 0;
+}
+#endif
+
+// 유기농배추
+#if 0
+#include <bits/stdc++.h> 
+using namespace std;
+
+int t, m, n, k;
+int dx[4] = { 0, 1, 0, -1 };
+int dy[4] = { 1, 0, -1, 0 };
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> t;
+
+	while (t--) {
+		// 가로, 세로, 개수 입력
+		cin >> m >> n >> k;
+
+		// 배열 초기화
+		vector<vector<int>> board(m, vector<int>(n, 0));
+		// 방문여부 배열
+		vector<vector<bool>> visited(m, vector<bool>(n, false));
+
+		// 배추 좌표입력받기, 표시하기
+		for (int i = 0; i < k; i++) {
+			int x, y;
+			cin >> x >> y;
+			board[x][y] = 1;
+		}
+
+		// 배추 그룹 = 필요한 지렁이 개수
+		int wormCnt = 0;
+
+		// 한칸씩 살펴보기
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++) {
+				// 방문문한적이 있거나, 배추가 없는곳은 패스
+				if (visited[i][j] || board[i][j] == 0) continue;
+
+				queue<pair<int, int>> q;
+				q.push({ i, j });
+				visited[i][j] = true;
+
+				while (!q.empty()) {
+					int x = q.front().first;
+					int y = q.front().second;
+					q.pop();
+
+					for (int k = 0; k < 4; k++) {
+						int nx = x + dx[k];
+						int ny = y + dy[k];
+
+						if (nx < 0 || ny < 0 || nx >= m || ny >= n) continue;
+						if (visited[nx][ny] || board[nx][ny] == 0) continue;
+
+						q.push({ nx, ny });
+						visited[nx][ny] = true;
+					}
+				}
+
+				wormCnt++;
+			}
+		}
+
+		cout << wormCnt << '\n';
+
+	}
+
+
+	return 0;
+}
+#endif
