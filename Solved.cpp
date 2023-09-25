@@ -879,3 +879,48 @@ int main() {
 	return 0;
 }
 #endif
+
+// N°ú M (4)
+#if 0
+#include <bits/stdc++.h> 
+using namespace std;
+
+int n, m;
+vector<int> arr;
+
+void Dfs(int cnt, int idx);
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+
+	cin >> n >> m;
+
+	Dfs(1, 1);
+
+
+	return 0;
+}
+
+void Dfs(int cnt, int idx)
+{
+	if (cnt > m)
+	{
+		for (int x : arr)
+		{
+			cout << x << " ";
+		}
+		cout << '\n';
+		return;
+	}
+	else
+	{
+		for (int i = idx; i <= n; i++)
+		{
+			arr.push_back(i);
+			Dfs(cnt + 1, i);
+			arr.pop_back();
+		}
+	}
+}
+#endif
