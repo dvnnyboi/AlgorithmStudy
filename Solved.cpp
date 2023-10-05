@@ -776,7 +776,7 @@ int main() {
 }
 #endif
 
-// 피로도
+// 22864 : 피로도
 #if 0
 #include <bits/stdc++.h> 
 using namespace std;
@@ -807,7 +807,7 @@ int main() {
 }
 #endif
 
-// 유기농배추
+// 1012 : 유기농배추
 #if 0
 #include <bits/stdc++.h> 
 using namespace std;
@@ -880,7 +880,7 @@ int main() {
 }
 #endif
 
-// N과 M (4)
+// 15652 : N과 M (4)
 #if 0
 #include <bits/stdc++.h> 
 using namespace std;
@@ -923,4 +923,75 @@ void Dfs(int cnt, int idx)
 		}
 	}
 }
+#endif
+
+// 17086 : 아기 상어 2
+#if 0
+#include <bits/stdc++.h> 
+using namespace std;
+
+int n, m;
+vector<vector<int>> board;
+vector<vector<int>> dist;
+int dx[8] = { 0, 1, 0, -1, 1, 1, -1, -1 };
+int dy[8] = { 1, 0, -1, 0, 1, -1, 1, -1 };
+
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n >> m;
+
+	board.assign(n, vector<int>(m));
+	dist.assign(n, vector<int>(m, 2e9));
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			cin >> board[i][j];
+			if (board[i][j] == 1) dist[i][j] = 0;
+		}
+	}
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			if (dist[i][j] != 0) continue;
+
+			queue<pair<int, int>> q;
+			q.push({ i, j });
+
+			while (!q.empty()) {
+				int x = q.front().first;
+				int y = q.front().second;
+				q.pop();
+
+				for (int k = 0; k < 8; k++) {
+					int nx = x + dx[k];
+					int ny = y + dy[k];
+
+					if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
+					if (dist[nx][ny] <= dist[x][y] + 1) continue;
+
+					dist[nx][ny] = dist[x][y] + 1;
+
+					q.push({ nx, ny });
+				}
+
+			}
+
+		}
+	}
+
+	int biggest = 0;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			biggest = max(biggest, dist[i][j]);
+		}
+	}
+
+	cout << biggest;
+
+	return 0;
+}
+
+
 #endif
