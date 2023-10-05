@@ -995,3 +995,57 @@ int main() {
 
 
 #endif
+
+// 16928 : 뱀과 사다리 게임
+#if 0
+#include <bits/stdc++.h> 
+using namespace std;
+
+
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	int n, m;
+
+	int board[101] = { 0, };
+	int tries[101] = { 0, };
+
+	iota(board, board + 101, 0);
+	fill(tries + 2, tries + 101, 2e9);
+
+	cin >> n >> m;
+	int total = n + m;
+	while (total--) {
+		int u, v;
+		cin >> u >> v;
+		board[u] = v;
+	}
+
+	queue<int> q;
+	q.push(1);
+
+	while (!q.empty()) {
+		int curr = q.front();
+		q.pop();
+
+		for (int i = 6; i > 0; i--) {
+			if (curr + i > 100) continue;
+
+			int next = board[curr + i];
+
+			if (tries[next] == 2e9) {
+				tries[next] = tries[curr] + 1;
+				q.push(next);
+			}
+
+		}
+	}
+
+	cout << tries[100];
+
+	return 0;
+}
+
+
+#endif
