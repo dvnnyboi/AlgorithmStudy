@@ -1,13 +1,4 @@
-﻿  Solving.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xutility(4484,24): warning C4244: '=': conversion from 'const _Ty' to 'int', possible loss of data
-          with
-          [
-              _Ty=double
-          ]
-D:\AlgorithmStudy\Solving.cpp(15): message : see reference to function template instantiation 'void std::fill<int*,double>(const _FwdIt,const _FwdIt,const _Ty &)' being compiled
-          with
-          [
-              _FwdIt=int *,
-              _Ty=double
-          ]
+﻿  Solved.cpp
+  Solving.cpp
+  Generating Code...
   AlgorithmStudy.vcxproj -> D:\AlgorithmStudy\Debug\AlgorithmStudy.exe

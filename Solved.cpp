@@ -1049,3 +1049,111 @@ int main() {
 
 
 #endif
+
+// 9019 : DSLR
+#if 0
+#include <bits/stdc++.h> 
+using namespace std;
+
+int t;
+pair<int, string> OperationD(pair<int, string> x);
+pair<int, string> OperationS(pair<int, string> x);
+pair<int, string> OperationL(pair<int, string> x);
+pair<int, string> OperationR(pair<int, string> x);
+bool visited[10000] = { false, };
+
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> t;
+
+	while (t--)
+	{
+		memset(visited, false, sizeof(visited));
+		int a, b;
+		cin >> a >> b;
+		pair<int, string> numA = { a, "" };
+
+		queue<pair<int, string>> q;
+		q.push(numA);
+		visited[numA.first] = true;
+
+		while (!q.empty())
+		{
+			pair<int, string> next = q.front();
+			q.pop();
+
+			for (int i = 0; i < 4; i++)
+			{
+				pair<int, string> candidate;
+				switch (i)
+				{
+				case 0:
+					candidate = OperationD(next);
+					break;
+				case 1:
+					candidate = OperationS(next);
+					break;
+				case 2:
+					candidate = OperationL(next);
+					break;
+				case 3:
+					candidate = OperationR(next);
+					break;
+				default:
+					break;
+				}
+
+				if (visited[candidate.first]) continue;
+				if (candidate.first == b)
+				{
+					cout << candidate.second << '\n';
+					q = queue<pair<int, string>>();
+					break;
+				}
+				q.push(candidate);
+				visited[candidate.first] = true;
+			}
+		}
+	}
+
+	return 0;
+}
+
+pair<int, string> OperationD(pair<int, string> x)
+{
+	int num = (x.first * 2) % 10000;
+	string command = x.second + "D";
+	return { num, command };
+}
+
+pair<int, string> OperationS(pair<int, string> x)
+{
+	int num = x.first - 1 < 0 ? 9999 : x.first - 1;
+	string command = x.second + "S";
+	return { num, command };
+}
+
+pair<int, string> OperationL(pair<int, string> x)
+{
+	int movingDigit = x.first / 1000;
+	int num = x.first % 1000;
+	num *= 10;
+	num += movingDigit;
+	string command = x.second + "L";
+	return { num, command };
+}
+
+pair<int, string> OperationR(pair<int, string> x)
+{
+	int movingDigit = x.first % 10;
+	int num = x.first / 10;
+	num += movingDigit * 1000;
+
+	string command = x.second + "R";
+	return { num, command };
+}
+
+
+#endif
