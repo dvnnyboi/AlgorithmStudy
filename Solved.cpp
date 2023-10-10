@@ -1157,3 +1157,59 @@ pair<int, string> OperationR(pair<int, string> x)
 
 
 #endif
+
+// 15666 : N°ú M(12)
+#if 0
+#include <bits/stdc++.h> 
+using namespace std;
+
+int n, m;
+vector<int> nums;
+vector<int> outPut;
+void Dfs(int nextIdx, int cnt);
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+
+	cin >> n >> m;
+
+	nums.assign(n, 0);
+
+	for (int i = 0; i < n; i++)
+	{
+		cin >> nums[i];
+	}
+
+	sort(nums.begin(), nums.end());
+	auto newEnd = unique(nums.begin(), nums.end());
+	nums.assign(nums.begin(), newEnd);
+
+	Dfs(0, 0);
+
+	return 0;
+}
+
+void Dfs(int nextIdx, int cnt)
+{
+	if (cnt == m)
+	{
+		for (int num : outPut)
+		{
+			cout << num << ' ';
+		}
+		cout << '\n';
+
+		return;
+	}
+
+	for (int i = nextIdx; i < nums.size(); i++)
+	{
+		outPut.push_back(nums[i]);
+		Dfs(i, cnt + 1);
+		outPut.pop_back();
+	}
+
+}
+
+#endif
