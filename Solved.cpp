@@ -1213,3 +1213,66 @@ void Dfs(int nextIdx, int cnt)
 }
 
 #endif
+
+// 16953 : A-->B
+#if 0
+#include <bits/stdc++.h> 
+using namespace std;
+
+
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	long long a, b;
+
+	cin >> a >> b;
+
+	set<int> s;
+	int cnt = -1;
+
+	queue<pair<long long, int>> q;
+	q.push({ a, 0 });
+	s.insert(a);
+
+	while (!q.empty())
+	{
+		pair<long long, int> curr = q.front();
+		q.pop();
+
+		for (int i = 0; i < 2; i++) {
+			pair<long long, int> next;
+			switch (i)
+			{
+			case 0:
+				next = { curr.first * 2, curr.second + 1 };
+				break;
+			case 1:
+				next = { curr.first * 10 + 1, curr.second + 1 };
+				break;
+			default:
+				break;
+			}
+			if (next.first > b || s.find(next.first) != s.end()) continue;
+
+			else if (next.first < b)
+			{
+				q.push(next);
+				s.insert(next.first);
+			}
+			else if (next.first == b)
+			{
+				cnt = next.second + 1;
+				break;
+			}
+		}
+	}
+	cout << cnt;
+
+
+
+	return 0;
+}
+
+
+#endif
