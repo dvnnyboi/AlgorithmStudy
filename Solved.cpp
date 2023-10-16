@@ -1276,3 +1276,40 @@ int main() {
 
 
 #endif
+
+// 1149: RGB°Å¸®
+#if 0
+#include <bits/stdc++.h> 
+using namespace std;
+
+typedef struct _Colors
+{
+	int r = 0, g = 0, b = 0;
+} Colors;
+
+int n;
+vector<Colors> colorArr;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n;
+	colorArr.resize(n);
+
+	for (int i = 0; i < n; i++) {
+		cin >> colorArr[i].r >> colorArr[i].g >> colorArr[i].b;
+	}
+	for (int i = 1; i < n; i++) {
+		colorArr[i].r += min(colorArr[i - 1].g, colorArr[i - 1].b);
+		colorArr[i].g += min(colorArr[i - 1].r, colorArr[i - 1].b);
+		colorArr[i].b += min(colorArr[i - 1].r, colorArr[i - 1].g);
+	}
+
+	cout << min(colorArr[n - 1].r, min(colorArr[n - 1].g, colorArr[n - 1].b));
+
+
+	return 0;
+}
+
+
+#endif
