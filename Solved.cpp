@@ -1313,3 +1313,63 @@ int main() {
 
 
 #endif
+
+// 1991: 트리 순회
+#if 0
+#include <bits/stdc++.h>
+using namespace std;
+
+struct middle {
+	char left;
+	char right;
+};
+
+vector<middle> arr(26);
+int n;
+void pre(char r);
+void in(char r);
+void post(char r);
+
+int main() {
+
+	arr.resize(50);
+	cin >> n;
+
+	for (int i = 0; i < n; i++) {
+		char m, l, r;
+		cin >> m >> l >> r;
+		arr[m - 'A'] = { l, r };
+	}
+
+	pre('A');
+	cout << '\n';
+	in('A');
+	cout << '\n';
+	post('A');
+	cout << '\n';
+
+
+
+	return 0;
+}
+
+void pre(char r) {
+	if (r == '.') return;
+	cout << r;
+	pre(arr[r - 'A'].left);
+	pre(arr[r - 'A'].right);
+}
+void in(char r) {
+	if (r == '.') return;
+	in(arr[r - 'A'].left);
+	cout << r;
+	in(arr[r - 'A'].right);
+}
+void post(char r) {
+	if (r == '.') return;
+	post(arr[r - 'A'].left);
+	post(arr[r - 'A'].right);
+	cout << r;
+}
+
+#endif
