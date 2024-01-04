@@ -1467,3 +1467,45 @@ int main() {
 }
 
 #endif
+
+// 1912: ¿¬¼ÓÇÕ
+#if 0
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+	int n;
+	vector<int> iVals;
+	vector<int> dp;
+	int maxVal = -2e9;
+	cin >> n;
+
+	dp.resize(n);
+	iVals.resize(n);
+
+	for (int i = 0; i < n; i++) {
+		cin >> iVals[i];
+		if (i == 0) {
+			maxVal = iVals[i];
+			dp[i] = iVals[i];
+		}
+		else {
+			int factor = dp[i - 1] + iVals[i];
+			if (factor < iVals[i]) dp[i] = iVals[i];
+			else {
+				dp[i] = factor;
+			}
+			maxVal = max(dp[i], maxVal);
+		}
+	}
+
+	cout << maxVal;
+
+	return 0;
+}
+
+#endif

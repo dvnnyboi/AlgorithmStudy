@@ -1,1 +1,2 @@
 D:\AlgorithmStudy\Debug\AlgorithmStudy.exe
+D:\Github\AlgorithmStudy\Debug\AlgorithmStudy.exe
