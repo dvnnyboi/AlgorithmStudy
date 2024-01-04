@@ -1509,3 +1509,66 @@ int main() {
 }
 
 #endif
+
+// 11055: 가장 큰 증가하는 부분 수열
+#if 0
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int nums[1000] = { 0, };
+int dp[1000] = { 0, };
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	int n;
+	cin >> n;
+
+	for (int i = 0; i < n; i++) {
+		cin >> nums[i];
+		dp[i] = nums[i];
+	}
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < i; j++) {
+			if (nums[j] < nums[i] && dp[i] < dp[j] + nums[i]) {
+				dp[i] = dp[j] + nums[i];
+			}
+		}
+	}
+
+	cout << *max_element(dp, dp + n);
+
+	return 0;
+}
+
+#endif
+
+// 1904: 01타일
+#if 0
+#include <bits/stdc++.h>
+#define MOD 15746
+
+using namespace std;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	int n;
+	cin >> n;
+
+	int pprev = 0, prev = 1, curr = 1;
+	for (int i = 0; i < n; i++) {
+		curr = (prev + pprev) % MOD;
+		pprev = prev;
+		prev = curr;
+	}
+
+	cout << curr % MOD;
+
+	return 0;
+}
+
+#endif
+
