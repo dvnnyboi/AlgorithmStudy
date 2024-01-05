@@ -1572,3 +1572,39 @@ int main() {
 
 #endif
 
+// 1788: 피보나치 수의 확장
+#if 0
+#include <bits/stdc++.h>
+
+#define MAX 1000000000
+
+using namespace std;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	int n;
+	cin >> n;
+
+	long long pprev = 0, prev = 1, curr = 0;
+
+	for (int i = 0; i < abs(n); i++) {
+		pprev = prev;
+		prev = curr;
+		curr = (pprev + prev) % MAX;
+	}
+
+	if (n < 0 && n % 2 == 0) cout << -1;
+	else if (n == 0) cout << 0;
+	else cout << 1;
+
+	cout << '\n';
+
+	cout << curr;
+
+
+	return 0;
+}
+
+#endif
+
