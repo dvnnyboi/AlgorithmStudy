@@ -1608,3 +1608,42 @@ int main() {
 
 #endif
 
+
+// 1166: ¼±¹°
+#if 0
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n, l, w, h;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n >> l >> w >> h;
+
+	long double right = min(min(l, w), h);
+	long double left = right / n;
+	long double middle = (left + right) / 2.0;
+	long long cnt = (long long)(l / middle) * (long long)(w / middle) * (long long)(h / middle);
+
+	int iterationCnt = 10000;
+	while (iterationCnt--) {
+		if (cnt < n) {
+			right = middle;
+		}
+		else if (cnt >= n) {
+			left = middle;
+		}
+		middle = (left + right) / 2;
+		cnt = (long long)(l / middle) * (long long)(w / middle) * (long long)(h / middle);
+	}
+	cout << fixed;
+	cout.precision(15);
+	cout << left;
+
+
+	return 0;
+}
+
+#endif
