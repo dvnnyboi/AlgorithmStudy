@@ -1689,3 +1689,35 @@ int main() {
 }
 
 #endif
+
+// 1026: º¸¹°
+#if 0
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n;
+int arrA[50] = {}, arrB[50] = {};
+
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n;
+
+	for (int i = 0; i < n; i++) cin >> arrA[i];
+	sort(arrA, arrA + n);
+	for (int i = 0; i < n; i++) cin >> arrB[i];
+	sort(arrB, arrB + n, greater<int>());
+
+	int ans = 0;
+	for (int i = 0; i < n; i++) {
+		ans += arrA[i] * arrB[i];
+	}
+
+	cout << ans;
+
+	return 0;
+}
+
+#endif
