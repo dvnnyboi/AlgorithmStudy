@@ -1721,3 +1721,48 @@ int main() {
 }
 
 #endif
+
+// 12865: Æò¹üÇÑ ¹è³¶
+#if 0
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n, k;
+int dp[101][100001] = {};
+int wv[2][101] = {};
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n >> k;
+	for (int i = 1; i <= n; i++) {
+		cin >> wv[0][i] >> wv[1][i];
+	}
+
+	for (int i = 1; i <= n; i++) {
+		int weight = wv[0][i];
+		int value = wv[1][i];
+		for (int j = 1; j <= k; j++) {
+
+			if (weight <= j) {
+				if (value + dp[i - 1][j - weight] > dp[i - 1][j]) {
+					dp[i][j] = value + dp[i - 1][j - weight];
+				}
+				else {
+					dp[i][j] = dp[i - 1][j];
+				}
+			}
+			else {
+				dp[i][j] = dp[i - 1][j];
+			}
+		}
+	}
+
+	cout << dp[n][k];
+
+
+	return 0;
+}
+
+#endif
