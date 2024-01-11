@@ -1766,3 +1766,40 @@ int main() {
 }
 
 #endif
+
+// 15988: 1, 2, 3 ¥ı«œ±‚ 3
+#if 0
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define MOD 1000000009
+#define MAX 1000000
+
+int t;
+long long dp[MAX + 1] = {};
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	dp[1] = 1;
+	dp[2] = 2;
+	dp[3] = 4;
+
+	for (int i = 4; i <= MAX; i++) {
+		dp[i] = (dp[i - 3] % MOD + dp[i - 2] % MOD + dp[i - 1] % MOD) % MOD;
+	}
+
+	cin >> t;
+
+	while (t--) {
+		int n;
+		cin >> n;
+		cout << dp[n] << '\n';
+
+	}
+
+	return 0;
+}
+
+#endif
