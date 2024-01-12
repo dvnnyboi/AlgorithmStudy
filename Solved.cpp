@@ -1835,3 +1835,117 @@ int main() {
 }
 
 #endif
+
+// 1753: 최단경로 - Dijkstra(다익스트라)
+#if 0
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+// 기존의 priority_queue에 pair<int, int> 자료형으로 한다면 pair의 first값이 큰 순으로 정렬됨.
+// 아래 cmp구조체로 연산자 오버로딩을 통해 순서를 바꿔준다.
+// 다른 자료구조(array,list 등) 에서는 우선순위를 바꿀 때는 a > b를 하면 큰 순서대로 정렬되지만, 여기선 a > b를 하면 작은 순서대로 정렬된다.
+struct cmp {
+	bool operator()(pair<int, int> a, pair<int, int> b) {
+		if (a.first == b.first) return a.second > b.second;
+		return a.first > b.first;
+	}
+};
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	int v, e, k;
+	cin >> v >> e >> k;
+
+	vector<pair<int, int>> edges[20001];
+	vector<int> dist(v + 1, 2e9);
+	vector<int> visited(v + 1, false);
+
+	dist[k] = 0;
+
+	for (int i = 1; i <= e; i++) {
+		int u, v, w;
+		cin >> u >> v >> w;
+		edges[u].push_back(make_pair(v, w));
+	}
+
+	// pair의 first값이 작은순서대로 정렬되도록 cmp 위에서 정의했음.
+	// first값이 같을경우 second값이 작은 순으로 정렬되도록 함.
+	priority_queue<pair<int, int>, deque<pair<int, int>>, cmp> pq;
+	pq.push(make_pair(0, k));
+
+	while (!pq.empty()) {
+		int weight = pq.top().first;
+		int curr = pq.top().second;
+		pq.pop();
+
+		for (int i = 0; i < edges[curr].size(); i++) {
+			int next = edges[curr][i].first;
+			int nWeight = edges[curr][i].second;
+
+			if (dist[next] > weight + nWeight) {
+				dist[next] = weight + nWeight;
+				pq.push(make_pair(dist[next], next));
+			}
+		}
+	}
+
+	for (int i = 1; i <= v; i++) {
+		if (dist[i] == 2e9) {
+			cout << "INF";
+		}
+		else cout << dist[i];
+		cout << '\n';
+	}
+
+	//배열사용하게되면 메모리초과 발생.
+	// int 자료형으로 20000 * 20000 배열을 만들면 1.6GB 정도 나옴.
+	/*
+	int v, e, k;
+	cin >> v >> e >> k;
+
+	vector<int> dist(v + 1, 2e9);
+	vector<bool> visited(v + 1, false);
+	vector<vector<int>> edges(v + 1, vector<int>(v + 1, 2e9));
+
+	dist[k] = 0;
+
+	// 스스로에게 가는 가중치는 -1처리
+	for(int i = 1; i <= v; i++) edges[i][i] = -1;
+
+	for (int i = 0; i < e; i++) {
+		int u, v, w;
+		cin >> u >> v >> w;
+		edges[u][v] = w;
+	}
+
+	queue<int> q;
+	q.push(k);
+	while (!q.empty()) {
+		int curr = q.front();
+		q.pop();
+		for (int i = 1; i <= v; i++) {
+			if (visited[i] || edges[curr][i] < 0 || edges[curr][i] == 2e9) continue;
+			q.push(i);
+			if (dist[i] > dist[curr] + edges[curr][i]) {
+				dist[i] = dist[curr] + edges[curr][i];
+			}
+		}
+		visited[curr] = true;
+	}
+
+	for (int i = 1; i <= v; i++) {
+		if (dist[i] == 2e9) {
+			cout << "INF";
+		}
+		else cout << dist[i];
+		cout << '\n';
+	}
+	*/
+
+	return 0;
+}
+
+#endif
