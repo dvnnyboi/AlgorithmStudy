@@ -1949,3 +1949,48 @@ int main() {
 }
 
 #endif
+
+// 18429: ±Ù¼Õ½Ç
+#if 0
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n, k;
+int kits[8] = {};
+bool visited[8] = {};
+int pass = 0;
+
+void DFS(int weight, int dayCnt);
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n >> k;
+	for (int i = 0; i < n; i++) cin >> kits[i];
+
+	DFS(0, 0);
+
+	cout << pass;
+
+	return 0;
+}
+
+void DFS(int weight, int dayCnt) {
+
+	if (weight < 0) return;
+	else if (dayCnt == n) {
+		pass++;
+		return;
+	}
+
+	for (int i = 0; i < n; i++) {
+		if (visited[i]) continue;
+
+		visited[i] = true;
+		DFS(weight + kits[i] - k, dayCnt + 1);
+		visited[i] = false;
+	}
+}
+
+#endif
