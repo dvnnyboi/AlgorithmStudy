@@ -1,2 +1,3 @@
 ﻿  Solving.cpp
+D:\Github\AlgorithmStudy\Solving.cpp(8,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   AlgorithmStudy.vcxproj -> D:\Github\AlgorithmStudy\Debug\AlgorithmStudy.exe

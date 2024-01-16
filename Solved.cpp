@@ -1994,3 +1994,58 @@ void DFS(int weight, int dayCnt) {
 }
 
 #endif
+
+// 10971: 외판원 순회 - BackTracking(DFS)
+#if 0
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n;
+int costs[10][10] = {};
+int visited[10] = {};
+int minExpense = 2e9;
+int startCity;
+
+void Dfs(int currentCity, int cityCnt, int expense);
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			cin >> costs[i][j];
+		}
+	}
+
+	for (int i = 0; i < n; i++) {
+		visited[i] = true;
+		startCity = i;
+		Dfs(i, 1, 0);
+		visited[i] = false;
+	}
+
+	cout << minExpense;
+
+	return 0;
+}
+
+void Dfs(int currentCity, int cityCnt, int expense) {
+	if (cityCnt == n) {
+		if (costs[currentCity][startCity] == 0) return;
+		minExpense = min(minExpense, expense + costs[currentCity][startCity]);
+		return;
+	}
+
+	for (int i = 0; i < n; i++) {
+		if (visited[i] || costs[currentCity][i] == 0) continue;
+
+		visited[i] = true;
+		Dfs(i, cityCnt + 1, expense + costs[currentCity][i]);
+		visited[i] = false;
+	}
+
+}
+
+#endif
