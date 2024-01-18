@@ -2049,3 +2049,35 @@ void Dfs(int currentCity, int cityCnt, int expense) {
 }
 
 #endif
+
+// 17266: 어두운 굴다리
+#if 0
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n, m;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n >> m;
+	int maxVal = 0;
+	int curr = 0;
+	for (int i = 0; i < m; i++) {
+		int next, dist;
+
+		cin >> next;
+
+		if (i == 0) dist = next;
+		else dist = (next - curr) / 2 + (next - curr) % 2;
+		maxVal = max(maxVal, dist);
+		curr = next;
+	}
+	maxVal = max(maxVal, n - curr);
+	cout << maxVal;
+
+	return 0;
+}
+
+#endif
