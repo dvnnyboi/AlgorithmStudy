@@ -2081,3 +2081,58 @@ int main() {
 }
 
 #endif
+
+// 15723: n단 논법
+#if 0
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int alphabets[26][26];
+int n, m;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+	char x, y;
+	string s;
+
+	// 초기화
+	for (int i = 0; i < 26; i++) {
+		for (int j = 0; j < 26; j++) {
+			if (i == j) continue;
+			alphabets[i][j] = 2e9;
+		}
+	}
+	// 전제 입력
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> x >> s >> y;
+		alphabets[x - 'a'][y - 'a'] = 1;
+	}
+	// 플로이드-워셜 수행
+	for (int i = 0; i < 26; i++) {
+		for (int j = 0; j < 26; j++) {
+			for (int k = 0; k < 26; k++) {
+				if (j == k || alphabets[j][i] == 2e9 || alphabets[i][k] == 2e9) continue;
+
+				if (alphabets[j][k] > alphabets[j][i] + alphabets[i][k]) {
+					alphabets[j][k] = alphabets[j][i] + alphabets[i][k];
+				}
+			}
+		}
+	}
+	// 결론 입력 및 판정
+	cin >> m;
+	for (int i = 0; i < m; i++) {
+		cin >> x >> s >> y;
+
+		if (alphabets[x - 'a'][y - 'a'] == 2e9) cout << "F";
+		else cout << "T";
+		cout << '\n';
+	}
+
+
+
+	return 0;
+}
+#endif
