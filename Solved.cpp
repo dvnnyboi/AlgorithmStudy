@@ -2136,3 +2136,36 @@ int main() {
 	return 0;
 }
 #endif
+
+// 20053: 최소, 최대 2
+#if 0
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int t, n;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> t;
+
+	while (t--) {
+		int minVal = 2e9;
+		int maxVal = -2e9;
+
+		cin >> n;
+
+		for (int i = 0; i < n; i++) {
+			int temp;
+			cin >> temp;
+			maxVal = max(temp, maxVal);
+			minVal = min(temp, minVal);
+		}
+
+		cout << minVal << " " << maxVal << '\n';
+	}
+
+	return 0;
+}
+#endif
