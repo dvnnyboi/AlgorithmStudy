@@ -2169,3 +2169,55 @@ int main() {
 	return 0;
 }
 #endif
+
+// 5904: Moo∞‘¿”
+#if 0
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void GetSeq(int level, int idx, int cnt);
+
+int n;
+vector<int> lengths;
+string m = "moo";
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n;
+
+	int lvl = 0, cnt = 3;
+	lengths.push_back(3);
+
+	while (cnt < n) {
+		lvl++;
+		cnt = cnt * 2 + (1 + lvl + 2);
+		lengths.push_back(cnt);
+	}
+
+	GetSeq(lvl, n, cnt);
+
+	return 0;
+}
+
+void GetSeq(int level, int idx, int cnt)
+{
+	if (level == 0) cout << m[idx - 1];
+
+	else {
+		if (idx <= lengths[level - 1]) {
+			GetSeq(level - 1, idx, cnt);
+		}
+		else if (idx > lengths[level - 1] && idx <= lengths[level - 1] + level + 3) {
+			if (idx == lengths[level - 1] + 1) cout << "m";
+			else cout << "o";
+		}
+		else if (idx > lengths[level - 1] + level + 3) {
+			GetSeq(level - 1, idx - (lengths[level - 1] + level + 3), cnt);
+		}
+	}
+
+}
+
+#endif
