@@ -2221,3 +2221,59 @@ void GetSeq(int level, int idx, int cnt)
 }
 
 #endif
+
+// 1967: 트리의 지름
+#if 0
+#include <bits/stdc++.h>
+
+typedef unsigned int UINT;
+
+using namespace std;
+
+void Farthest(int next, int dist);
+
+int n, maxDist = 0, endNode;
+vector<pair<int, int>> nodes[10001];
+//vector<vector<UINT>> nodes;
+//UINT nodes[10001][10001] = {};
+bool visited[10001] = {};
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n;
+
+	for (int i = 0; i < n - 1; i++) {
+		int x, y, w;
+		cin >> x >> y >> w;
+		nodes[x].push_back({ y, w });
+		nodes[y].push_back({ x, w });
+	}
+
+	Farthest(1, 0);
+
+	memset(visited, false, sizeof(visited));
+
+	Farthest(endNode, 0);
+
+	cout << maxDist;
+
+	return 0;
+}
+
+void Farthest(int next, int dist)
+{
+	if (visited[next]) return;
+
+	visited[next] = true;
+	if (dist > maxDist) {
+		maxDist = dist;
+		endNode = next;
+	}
+
+	for (int i = 0; i < nodes[next].size(); i++) {
+		Farthest(nodes[next][i].first, dist + nodes[next][i].second);
+	}
+}
+
+#endif
