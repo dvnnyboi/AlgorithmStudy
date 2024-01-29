@@ -2277,3 +2277,44 @@ void Farthest(int next, int dist)
 }
 
 #endif
+
+// 1182: 부분수열의 합
+#if 0
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void Dfs(int depth, int sumVal);
+
+int n, s, cnt = 0;
+int seq[20];
+bool visited[20];
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n >> s;
+
+	for (int i = 0; i < n; i++) cin >> seq[i];
+
+	Dfs(0, 0);
+	if (s == 0) cnt--;
+	cout << cnt;
+
+	return 0;
+}
+
+
+void Dfs(int depth, int sumVal) {
+	if (depth == n) {
+		if (sumVal == s) {
+			cnt++;
+		}
+		return;
+	}
+
+	Dfs(depth + 1, sumVal + seq[depth]);
+	Dfs(depth + 1, sumVal);
+
+}
+#endif
