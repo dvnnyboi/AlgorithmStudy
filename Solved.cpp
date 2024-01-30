@@ -2318,3 +2318,79 @@ void Dfs(int depth, int sumVal) {
 
 }
 #endif
+
+// 15686: 치킨 배달
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+void Dfs(int idx, int cnt);
+
+int n, m, chickenDist = 2e9;
+int city[50][50] = {};
+vector<pair<int, int>> homes;
+vector<pair<int, int>> chickens;
+vector<bool> visitedChicken;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	scanf("%d %d", &n, &m);
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			scanf("%d", &city[i][j]);
+			switch (city[i][j])
+			{
+			case 1:
+				homes.push_back({ i, j });
+				break;
+			case 2:
+				chickens.push_back({ i, j });
+				break;
+			default:
+				break;
+			}
+		}
+	}
+	visitedChicken.assign(chickens.size(), false);
+
+	Dfs(0, 0);
+
+	printf("%d", chickenDist);
+
+	return 0;
+}
+
+void Dfs(int idx, int cnt) {
+	if (cnt == m) {
+		int totalDist = 0;
+		for (int i = 0; i < homes.size(); i++) {
+			int dist = 2e9;
+			int x = homes[i].first;
+			int y = homes[i].second;
+			for (int j = 0; j < chickens.size(); j++) {
+				if (!visitedChicken[j]) continue;
+
+				int temp = abs(chickens[j].first - x) + abs(chickens[j].second - y);
+				dist = min(dist, temp);
+			}
+			totalDist += dist;
+		}
+		if (totalDist < chickenDist) {
+			chickenDist = totalDist;
+		}
+		return;
+	}
+	for (int i = idx; i < chickens.size(); i++) {
+		if (visitedChicken[i]) continue;
+
+		visitedChicken[i] = true;
+		Dfs(i, cnt + 1);
+		visitedChicken[i] = false;
+
+	}
+}
+
+#endif
