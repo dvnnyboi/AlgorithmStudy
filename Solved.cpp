@@ -2394,3 +2394,35 @@ void Dfs(int idx, int cnt) {
 }
 
 #endif
+
+// 14425: 문자열 집합
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int n, m;
+vector<string> s;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n >> m;
+	s.assign(n, "");
+	for (int i = 0; i < n; i++) cin >> s[i];
+	sort(s.begin(), s.end());
+
+	int cnt = 0;
+	for (int i = 0; i < m; i++) {
+		string tmp;
+		cin >> tmp;
+		if (binary_search(s.begin(), s.end(), tmp)) cnt++;
+	}
+
+	cout << cnt;
+
+	return 0;
+}
+
+#endif
