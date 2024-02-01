@@ -2426,3 +2426,46 @@ int main() {
 }
 
 #endif
+
+// 2624: 동전 바꿔주기
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int t, k;
+vector<pair<int, int>> pn;
+int dp[10001] = {};
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> t >> k;
+
+	int p, n;
+	for (int i = 0; i < k; i++) {
+		cin >> p >> n;
+		pn.push_back({ p, n });
+	}
+
+	dp[0] = 1;
+	for (int i = 0; i < k; i++) {
+		int currP = pn[i].first;
+		int currN = pn[i].second;
+		for (int j = t - currP; j >= 0; j--) {
+			if (dp[j] == 0) continue;
+			for (int l = 1; l <= currN; l++) {
+				int tmp = j + currP * l;
+				if (tmp > t) break;
+
+				dp[tmp] += dp[j];
+			}
+		}
+	}
+
+	cout << dp[t];
+
+	return 0;
+}
+#endif
