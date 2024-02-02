@@ -2469,3 +2469,31 @@ int main() {
 	return 0;
 }
 #endif
+
+// 11656: 접미사 배열
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+string s;
+string result[1000];
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> s;
+
+	for (int i = 0; i < s.size(); i++) {
+		result[i].assign(s.begin() + i, s.begin() + s.size());
+	}
+
+	sort(result, result + s.size());
+
+	for (int i = 0; i < s.size(); i++) {
+		cout << result[i] << '\n';
+	}
+
+	return 0;
+}
+#endif
