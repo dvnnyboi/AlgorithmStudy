@@ -2497,3 +2497,37 @@ int main() {
 	return 0;
 }
 #endif
+
+// 1251: 단어 나누기
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	string word;
+	cin >> word;
+
+	string ans("");
+	for (int right = 2; right < word.size(); right++) {
+		for (int left = 1; left < right; left++) {
+			string temp(word);
+
+			reverse(temp.begin(), temp.begin() + left);
+			reverse(temp.begin() + left, temp.begin() + right);
+			reverse(temp.begin() + right, temp.end());
+
+			if (ans == "" || temp.compare(ans) < 0) {
+				ans = temp;
+			}
+		}
+	}
+	cout << ans;
+
+
+	return 0;
+}
+#endif
