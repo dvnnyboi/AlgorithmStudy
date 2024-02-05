@@ -2531,3 +2531,58 @@ int main() {
 	return 0;
 }
 #endif
+
+// 3005: 크로스워드 퍼즐 쳐다보기
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int r, c;
+vector<string> words;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> r >> c;
+
+	for (int i = 0; i < r; i++) {
+		string temp;
+		cin >> temp;
+		words.push_back(temp);
+	}
+
+	string ans("");
+	for (int i = 0; i < r; i++) {
+		string temp("");
+		for (int j = 0; j < c; j++) {
+			if (words[i][j] == '#') {
+				if (ans == "" || (temp.size() > 1 && temp.compare(ans) < 0)) {
+					ans = temp;
+				}
+				temp = "";
+			}
+			else temp += words[i][j];
+		}
+		if (temp.size() > 1 && temp.compare(ans) < 0) ans = temp;
+	}
+	for (int j = 0; j < c; j++) {
+		string temp("");
+		for (int i = 0; i < r; i++) {
+			if (words[i][j] == '#') {
+				if (ans == "" || (temp.size() > 1 && temp.compare(ans) < 0)) {
+					ans = temp;
+				}
+				temp = "";
+			}
+			else temp += words[i][j];
+		}
+		if (temp.size() > 1 && temp.compare(ans) < 0) ans = temp;
+	}
+
+	cout << ans;
+
+	return 0;
+}
+#endif
