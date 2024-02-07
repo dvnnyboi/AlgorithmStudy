@@ -2586,3 +2586,53 @@ int main() {
 	return 0;
 }
 #endif
+
+// 16960: 스위치와 램프
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int n, m;
+bool lights[2001] = {};
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n >> m;
+	vector<deque<int>> switches(n);
+	for (int i = 0; i < n; i++) {
+		int temp;
+		cin >> temp;
+		for (int j = 0; j < temp; j++) {
+			int inVal;
+			cin >> inVal;
+			switches[i].push_back(inVal);
+		}
+	}
+	bool flag = false;
+	for (int i = 0; i < n; i++) {
+		memset(lights, false, sizeof(lights));
+		int cnt = m;
+		for (int j = 0; j < n; j++) {
+			if (i == j) continue;
+			for (auto k : switches[j]) {
+				if (lights[k]) continue;
+				else {
+					lights[k] = true;
+					cnt--;
+				}
+			}
+		}
+		if (cnt == 0) {
+			flag = true;
+			break;
+		}
+	}
+
+	cout << flag;
+
+	return 0;
+}
+#endif
