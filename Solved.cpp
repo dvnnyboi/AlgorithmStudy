@@ -2636,3 +2636,42 @@ int main() {
 	return 0;
 }
 #endif
+
+// 10819: 차이를 최대로
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int n, ans = 0;
+vector<int> nums;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n;
+
+	for (int i = 0; i < n; i++) {
+		int temp;
+		cin >> temp;
+		nums.push_back(temp);
+	}
+	sort(nums.begin(), nums.end());
+
+	do {
+		int sum = 0;
+		for (int i = 0; i < nums.size() - 1; i++) {
+			sum += abs(nums[i] - nums[i + 1]);
+		}
+
+		ans = max(sum, ans);
+
+	} while (next_permutation(nums.begin(), nums.end()));
+
+	cout << ans;
+
+	return 0;
+}
+
+#endif
