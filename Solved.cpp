@@ -2675,3 +2675,35 @@ int main() {
 }
 
 #endif
+
+// 1342: 행운의 문자열
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+string s;
+int ans = 0;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> s;
+
+	int len = s.size();
+	sort(s.begin(), s.end());
+	do {
+		int idx = 1;
+		while (idx < len && s[idx - 1] != s[idx]) {
+			idx++;
+		}
+		if (idx == len) ans++;
+	} while (next_permutation(s.begin(), s.end()));
+
+	cout << ans;
+
+	return 0;
+}
+
+#endif
