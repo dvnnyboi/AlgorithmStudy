@@ -2707,3 +2707,34 @@ int main() {
 }
 
 #endif
+
+// 10798: 세로읽기
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	char words[5][15] = { {'\0',}, };
+
+	for (int i = 0; i < 5; i++) {
+		string temp;
+		cin >> temp;
+		for (int j = 0; j < temp.size(); j++) words[i][j] = temp[j];
+	}
+
+	for (int i = 0; i < 15; i++) {
+		for (int j = 0; j < 5; j++) {
+			if (words[j][i] == '\0') continue;
+			cout << words[j][i];
+		}
+	}
+
+
+	return 0;
+}
+
+#endif
