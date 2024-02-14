@@ -2738,3 +2738,62 @@ int main() {
 }
 
 #endif
+
+// 7511: 소셜 네트워킹 어플리케이션
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int FindParent(int x);
+void Union(int x, int y);
+
+vector<int> parent;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	int tc;
+	cin >> tc;
+	for (int t = 1; t <= tc; t++) {
+		int n, k;
+		cin >> n >> k;
+
+		parent.assign(n, 0);
+		iota(parent.begin(), parent.end(), 0);
+
+		for (int i = 0; i < k; i++) {
+			int a, b;
+			cin >> a >> b;
+			Union(a, b);
+		}
+
+		int m;
+		cin >> m;
+		cout << "Scenario " << t << ":\n";
+		for (int i = 0; i < m; i++) {
+			int u, v;
+			cin >> u >> v;
+
+			cout << (FindParent(u) == FindParent(v) ? '1' : '0') << '\n';
+		}
+		cout << '\n';
+	}
+
+	return 0;
+}
+
+
+int FindParent(int x) {
+	if (parent[x] == x) return x;
+	return parent[x] = FindParent(parent[x]);
+}
+
+void Union(int x, int y) {
+	x = FindParent(x);
+	y = FindParent(y);
+
+	x < y ? parent[y] = x : parent[x] = y;
+}
+#endif
