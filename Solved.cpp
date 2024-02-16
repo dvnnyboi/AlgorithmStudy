@@ -2797,3 +2797,35 @@ void Union(int x, int y) {
 	x < y ? parent[y] = x : parent[x] = y;
 }
 #endif
+
+// 2156: 포도주 시식
+#if 0
+#include <stdio.h>
+#include <algorithm>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int main() {
+
+	int wines[10006] = { 0, };
+	int dp[10006] = { 0, };
+	int n;
+	scanf("%d", &n);
+
+	for (int i = 1; i <= n; i++) scanf("%d", &wines[i]);
+
+
+	dp[1] = wines[1];
+	dp[2] = dp[1] + wines[2];
+
+	for (int i = 3; i <= n; i++) {
+		dp[i] = max(dp[i - 1], max(dp[i - 3] + wines[i - 1] + wines[i], dp[i - 2] + wines[i]));
+	}
+
+	printf("%d", dp[n]);
+
+	return 0;
+}
+
+#endif
