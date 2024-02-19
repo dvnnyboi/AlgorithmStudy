@@ -2829,3 +2829,83 @@ int main() {
 }
 
 #endif
+
+// 2458: Å° ¼ø¼­
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int n, m;
+vector<vector<int>> smaller;
+vector<vector<int>> taller;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n >> m;
+	smaller.resize(n + 1);
+	taller.resize(n + 1);
+	for (int i = 0; i < m; i++) {
+		int small, tall;
+		cin >> small >> tall;
+		smaller[small].push_back(tall);
+		taller[tall].push_back(small);
+	}
+
+	int ans = 0;
+	vector<bool> visited;
+	for (int i = 1; i <= n; i++) {
+		int cnt = 1;
+		queue<int> q;
+
+		visited.assign(n + 1, false);
+		visited[i] = true;
+		for (int x : smaller[i]) {
+			visited[x] = true;
+			cnt++;
+			q.push(x);
+		}
+		while (!q.empty()) {
+			int next = q.front();
+			q.pop();
+
+			for (int x : smaller[next]) {
+				if (!visited[x]) {
+					visited[x] = true;
+					cnt++;
+					q.push(x);
+				}
+			}
+		}
+
+		visited.assign(n + 1, false);
+		visited[i] = true;
+		for (int x : taller[i]) {
+			visited[x] = true;
+			cnt++;
+			q.push(x);
+		}
+		while (!q.empty()) {
+			int next = q.front();
+			q.pop();
+
+			for (int x : taller[next]) {
+				if (!visited[x]) {
+					visited[x] = true;
+					cnt++;
+					q.push(x);
+				}
+			}
+		}
+
+		if (cnt == n) ans++;
+	}
+
+	cout << ans;
+
+	return 0;
+}
+
+#endif
