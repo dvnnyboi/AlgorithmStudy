@@ -2909,3 +2909,38 @@ int main() {
 }
 
 #endif
+
+// 2225: ÇÕºÐÇØ
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+#define MAX 1000000000
+
+using namespace std;
+
+int n, k;
+long long dp[201][201];
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n >> k;
+
+	dp[0][0] = 1;
+
+	for (int i = 1; i <= k; i++) {
+		for (int j = 0; j <= n; j++) {
+			for (int k = 0; k <= j; k++) {
+				dp[i][j] += dp[i - 1][k];
+			}
+
+			dp[i][j] %= MAX;
+		}
+	}
+
+	cout << dp[k][n];
+
+	return 0;
+}
+
+#endif
