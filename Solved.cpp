@@ -2944,3 +2944,46 @@ int main() {
 }
 
 #endif
+
+// 20002: 사과나무
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int n;
+int orchard[301][301] = {};
+int sumVal[301][301] = {};
+int maxVal = -2e9;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n;
+
+	for (int i = 1; i <= n; i++)
+		for (int j = 1; j <= n; j++)
+			cin >> orchard[i][j];
+
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= n; j++) {
+			sumVal[i][j] = orchard[i][j] + sumVal[i - 1][j] + sumVal[i][j - 1] - sumVal[i - 1][j - 1];
+		}
+	}
+
+	for (int k = 0; k <= n; k++) {
+		for (int i = 1 + k; i <= n; i++) {
+			for (int j = 1 + k; j <= n; j++) {
+				int cubicArea = sumVal[i][j] - sumVal[i - k - 1][j] - sumVal[i][j - k - 1] + sumVal[i - k - 1][j - k - 1];
+				maxVal = max(maxVal, cubicArea);
+			}
+		}
+	}
+
+	cout << maxVal;
+
+	return 0;
+}
+
+#endif
