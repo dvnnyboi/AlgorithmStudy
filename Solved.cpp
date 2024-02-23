@@ -2987,3 +2987,57 @@ int main() {
 }
 
 #endif
+
+// 22857: 가장 긴 짝수 연속한 부분 수열 (small)
+#if 0
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int n, k;
+vector<int> s;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n >> k;
+
+	s.resize(n);
+
+	for (int i = 0; i < n; i++) {
+		cin >> s[i];
+	}
+
+	int left = 0, right = 0;
+	int ans = 0, odds = 0, evens = 0;
+	if (s[0] % 2 == 0) {
+		evens++;
+		ans++;
+	}
+	else odds++;
+
+	while (left <= right) {
+		if (odds <= k) {
+			right++;
+			if (right >= n) break;
+			if (s[right] % 2 == 0) evens++;
+			else odds++;
+		}
+		else {
+			if (s[left] % 2 == 0) evens--;
+			else odds--;
+			left++;
+		}
+		ans = max(ans, evens);
+
+	}
+
+	cout << ans;
+
+	return 0;
+}
+
+#endif
