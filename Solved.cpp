@@ -3042,7 +3042,7 @@ int main() {
 
 #endif
 
-// 17413: 단어 뒤집기
+// 17413: 단어 뒤집기 2
 #if 0
 #include <iostream>
 #include <istream>
@@ -3092,6 +3092,37 @@ int main() {
 	}
 
 	cout << ans;
+
+	return 0;
+}
+
+#endif
+
+// 20291: 파일 정리
+#if 0
+#include <iostream>
+#include <map>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	int n;
+	cin >> n;
+
+	map<string, int> extension;
+	for (int i = 0; i < n; i++) {
+		string s;
+		cin >> s;
+		s = s.substr(s.find('.') + 1);
+		extension[s]++;
+	}
+
+	for (auto m : extension) {
+		cout << m.first << ' ' << m.second << '\n';
+	}
 
 	return 0;
 }
