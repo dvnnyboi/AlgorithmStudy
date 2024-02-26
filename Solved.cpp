@@ -3041,3 +3041,59 @@ int main() {
 }
 
 #endif
+
+// 17413: 단어 뒤집기
+#if 0
+#include <iostream>
+#include <istream>
+#include <string>
+#include <stack>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	string s;
+
+	getline(cin, s);
+
+	bool tag = false;
+	string ans("");
+	stack<char> reverse;
+	for (char c : s) {
+		if (tag) {
+			ans.push_back(c);
+			if (c == '>') tag = false;
+		}
+		else if (c == '<') {
+			while (!reverse.empty()) {
+				ans.push_back(reverse.top());
+				reverse.pop();
+			}
+			tag = true;
+			ans.push_back(c);
+		}
+		else {
+			if (c == ' ') {
+				while (!reverse.empty()) {
+					ans.push_back(reverse.top());
+					reverse.pop();
+				}
+				ans.push_back(c);
+			}
+			else reverse.push(c);
+		}
+	}
+	while (!reverse.empty()) {
+		ans.push_back(reverse.top());
+		reverse.pop();
+	}
+
+	cout << ans;
+
+	return 0;
+}
+
+#endif
