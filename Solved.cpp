@@ -3128,3 +3128,42 @@ int main() {
 }
 
 #endif
+
+// 10211: Maximum Subarray
+#if 0
+#include <iostream>
+#include <vector>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	int t;
+	cin >> t;
+	while (t--) {
+		int n;
+		cin >> n;
+
+		int maxVal = -2e9;
+		vector<int> dp(n + 1);
+		vector<int> arr(n + 1);
+		for (int i = 1; i <= n; i++) {
+			cin >> arr[i];
+		}
+
+		for (int i = 1; i <= n; i++) {
+			dp[i] = max(arr[i] + dp[i - 1], arr[i]);
+			maxVal = max(maxVal, dp[i]);
+		}
+
+		cout << maxVal << '\n';
+
+	}
+
+
+	return 0;
+}
+
+#endif
