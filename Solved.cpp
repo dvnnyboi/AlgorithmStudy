@@ -3167,3 +3167,44 @@ int main() {
 }
 
 #endif
+
+//11256: ªÁ≈¡
+#if 0
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	int t;
+	cin >> t;
+
+	while (t--) {
+		int j, n;
+		cin >> j >> n;
+
+		vector<int> boxes(n);
+		for (int i = 0; i < n; i++) {
+			int x, y;
+			cin >> x >> y;
+			boxes[i] = x * y;
+		}
+		sort(boxes.begin(), boxes.end(), greater<>());
+
+		int idx = 0;
+		int candies(j);
+		while (candies > 0) {
+			candies -= boxes[idx++];
+		}
+
+		cout << idx << '\n';
+	}
+
+	return 0;
+}
+
+#endif
