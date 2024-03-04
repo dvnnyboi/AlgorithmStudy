@@ -3168,7 +3168,7 @@ int main() {
 
 #endif
 
-//11256: ªÁ≈¡
+// 11256: ªÁ≈¡
 #if 0
 #include <iostream>
 #include <vector>
@@ -3207,4 +3207,63 @@ int main() {
 	return 0;
 }
 
+#endif
+
+// 1197: √÷º“ Ω∫∆–¥◊ ∆Æ∏Æ
+#if 0
+#include <iostream>
+#include <vector>
+#include <numeric>
+#include <algorithm>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int findParent(int x);
+void merge(int a, int b);
+
+vector<int> parents;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	int v, e;
+	cin >> v >> e;
+
+	parents.resize(v + 1);
+	iota(parents.begin(), parents.end(), 0);
+	vector<vector<int>> board;
+
+	for (int i = 0; i < e; i++) {
+		vector<int> temp(3);
+		cin >> temp[1] >> temp[2] >> temp[0];
+		board.push_back(temp);
+	}
+
+	sort(board.begin(), board.end());
+
+	int ans = 0;
+	for (int i = 0; i < e; i++) {
+		if (findParent(board[i][1]) == findParent(board[i][2])) continue;
+
+		ans += board[i][0];
+		merge(board[i][1], board[i][2]);
+	}
+
+	cout << ans;
+
+	return 0;
+}
+
+int findParent(int x) {
+	if (parents[x] != x) parents[x] = findParent(parents[x]);
+	return parents[x];
+}
+
+void merge(int a, int b) {
+	a = findParent(a);
+	b = findParent(b);
+	if (a < b) parents[b] = a;
+	else parents[a] = b;
+}
 #endif
