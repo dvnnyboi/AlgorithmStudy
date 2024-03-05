@@ -3267,3 +3267,49 @@ void merge(int a, int b) {
 	else parents[a] = b;
 }
 #endif
+
+// 11404: 플로이드
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int n, m;
+vector<vector<int>> cities;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n >> m;
+
+	cities.assign(n + 1, vector<int>(n + 1, 1e9));
+	for (int i = 1; i <= n; i++) cities[i][i] = 0;
+	for (int i = 0; i < m; i++) {
+		int a, b, c;
+		cin >> a >> b >> c;
+		cities[a][b] = min(c, cities[a][b]);
+	}
+
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= n; j++) {
+			for (int k = 1; k <= n; k++) {
+				cities[j][k] = min(cities[j][k], cities[j][i] + cities[i][k]);
+			}
+		}
+	}
+
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= n; j++) {
+			if (cities[i][j] == 1e9) cout << '0';
+			else cout << cities[i][j];
+			cout << ' ';
+		}
+		cout << '\n';
+	}
+
+	return 0;
+}
+
+
+#endif
