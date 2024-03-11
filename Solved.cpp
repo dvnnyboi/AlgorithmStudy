@@ -3313,3 +3313,39 @@ int main() {
 
 
 #endif
+
+// 20152: Game Addiction
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+long long arr[31][31];
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	for (int i = 0; i < 31; i++) {
+		arr[0][i] = 1;
+	}
+
+	for (int i = 1; i < 31; i++) {
+		for (int j = i; j < 31; j++) {
+			arr[i][j] = arr[i - 1][j] + arr[i][j - 1];
+		}
+	}
+
+	int h, n;
+
+	cin >> h >> n;
+
+	int ans = abs(h - n);
+	cout << arr[ans][ans];
+
+
+	return 0;
+}
+
+
+#endif
