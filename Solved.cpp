@@ -3349,3 +3349,36 @@ int main() {
 
 
 #endif
+
+// 1535: ¾È³ç
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int n;
+int dp[101];
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n;
+
+	vector<pair<int, int>> cost(n);
+
+	for (int i = 0; i < n; i++) cin >> cost[i].first;
+	for (int i = 0; i < n; i++) cin >> cost[i].second;
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 100; j >= cost[i].first; j--) {
+			dp[j] = max(dp[j], dp[j - cost[i].first] + cost[i].second);
+		}
+	}
+
+	cout << dp[99];
+
+	return 0;
+}
+
+#endif
