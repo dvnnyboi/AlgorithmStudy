@@ -3382,3 +3382,51 @@ int main() {
 }
 
 #endif
+
+// 19949: 영재의 시험
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+void Dfs(int checkCnt);
+
+int correctAns[10];
+int picks[10];
+int passCnt = 0;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	for (int i = 0; i < 10; i++) cin >> correctAns[i];
+
+	Dfs(0);
+
+	cout << passCnt;
+
+	return 0;
+}
+
+void Dfs(int checkCnt) {
+	if (checkCnt == 10) {
+		int score = 0;
+
+		for (int i = 0; i < 10; i++) {
+			if (correctAns[i] == picks[i]) score++;
+		}
+
+		if (score >= 5) passCnt++;
+
+		return;
+	}
+
+	for (int i = 1; i <= 5; i++) {
+		if (checkCnt > 1 && picks[checkCnt - 1] == i && picks[checkCnt - 2] == i) continue;
+
+		picks[checkCnt] = i;
+		Dfs(checkCnt + 1);
+		picks[checkCnt] = 0;
+	}
+}
+#endif
