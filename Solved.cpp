@@ -3430,3 +3430,47 @@ void Dfs(int checkCnt) {
 	}
 }
 #endif
+
+// 1059: 좋은 구간
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int l, n;
+vector<int> s;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> l;
+	s.assign(l + 1, 0);
+	for (int i = 0; i < l; i++) cin >> s[i];
+	cin >> n;
+
+	sort(s.begin(), s.end());
+
+	int left, right;
+	bool isInside = false;
+
+	for (int i = 1; i < l + 1; i++) {
+		if (n == s[i]) {
+			isInside = true;
+		}
+		else if (n < s[i]) {
+			left = s[i - 1] + 1;
+			right = s[i] - 1;
+			break;
+		}
+	}
+
+	if (!isInside) cout << (n - left) * (right - n + 1) + (right - n);
+	else cout << 0;
+
+
+	return 0;
+}
+
+
+#endif
