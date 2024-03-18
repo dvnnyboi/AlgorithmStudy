@@ -3474,3 +3474,75 @@ int main() {
 
 
 #endif
+
+// 13565: Ä§Åõ
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+vector<vector<int>> board;
+vector<vector<bool>> visited;
+int n, m;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n >> m;
+
+	board.assign(n, vector<int>(m));
+	visited.assign(n, vector<bool>(m, false));
+
+	for (int i = 0; i < n; i++) {
+		string inVal;
+		cin >> inVal;
+		for (int j = 0; j < m; j++) {
+			board[i][j] = inVal[j] - '0';
+		}
+	}
+
+	queue<pair<int, int>> q;
+	for (int i = 0; i < m; i++) {
+		if (!board[0][i]) {
+			visited[0][i] = true;
+			q.push({ 0, i });
+		}
+	}
+
+	int dx[4] = { 0, 1, 0, -1 };
+	int dy[4] = { 1, 0, -1, 0 };
+
+	while (!q.empty()) {
+		int x = q.front().first;
+		int y = q.front().second;
+		q.pop();
+
+		for (int i = 0; i < 4; i++) {
+			int nx = x + dx[i];
+			int ny = y + dy[i];
+
+			if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
+			if (visited[nx][ny] || board[nx][ny]) continue;
+
+			visited[nx][ny] = true;
+			q.push({ nx, ny });
+
+		}
+	}
+
+	string ans("NO");
+	for (int i = 0; i < m; i++) {
+		if (visited[n - 1][i]) {
+			ans = "YES";
+			break;
+		}
+	}
+
+	cout << ans;
+
+	return 0;
+}
+
+
+#endif
