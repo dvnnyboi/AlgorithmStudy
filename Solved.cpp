@@ -3546,3 +3546,51 @@ int main() {
 
 
 #endif
+
+// 2407: а╤гу
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int n, m;
+string dp[102][102];
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n >> m;
+
+	for (int i = 1; i <= n; i++) {
+		for (int j = 0; j <= i; j++) {
+			if (j == 0 || j == i) dp[i][j] = "1";
+
+			else {
+				int sum = 0;
+				string a = dp[i - 1][j];
+				string b = dp[i - 1][j - 1];
+
+				while (!a.empty() || !b.empty() || sum > 0) {
+					if (!a.empty()) {
+						sum += a.back() - '0';
+						a.pop_back();
+					}
+					if (!b.empty()) {
+						sum += b.back() - '0';
+						b.pop_back();
+					}
+
+					dp[i][j].push_back((sum % 10) + '0');
+					sum /= 10;
+				}
+				reverse(dp[i][j].begin(), dp[i][j].end());
+			}
+		}
+	}
+	cout << dp[n][m];
+	return 0;
+}
+
+
+#endif
