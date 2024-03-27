@@ -3594,3 +3594,48 @@ int main() {
 
 
 #endif
+
+// 10448: 유레카 이론
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int k;
+int triNum[1001];
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	for (int i = 1; i <= 1000; i++) {
+		triNum[i] = triNum[i - 1] + i;
+	}
+
+	cin >> k;
+	while (k--) {
+		int inVal;
+		cin >> inVal;
+
+		bool isEureka = false;
+
+		for (int i = 1; i <= 50; i++) {
+			for (int j = 1; j <= 50; j++) {
+				for (int l = 1; l <= 50; l++) {
+					if (triNum[i] + triNum[j] + triNum[l] == inVal) {
+						isEureka = true;
+						break;
+					}
+				}
+				if (isEureka) break;
+			}
+			if (isEureka) break;
+		}
+		cout << isEureka << '\n';
+	}
+
+	return 0;
+}
+
+
+#endif
