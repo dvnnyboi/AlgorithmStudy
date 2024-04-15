@@ -3639,3 +3639,45 @@ int main() {
 
 
 #endif
+
+//18311: ¿Õº¹
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+long long n, k;
+
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	cin >> n >> k;
+
+	vector<int> courses(n + 1);
+	for (int i = 1; i <= n; i++) {
+		cin >> courses[i];
+	}
+
+	for (int i = 1; i <= n; i++) {
+		k -= courses[i];
+		if (k < 0) {
+			cout << i;
+			return 0;
+		}
+	}
+	for (int i = n; i >= 1; i--) {
+		k -= courses[i];
+		if (k < 0) {
+			cout << i;
+			return 0;
+		}
+	}
+
+
+	return 0;
+}
+
+
+#endif
