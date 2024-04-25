@@ -3640,7 +3640,7 @@ int main() {
 
 #endif
 
-//18311: ø’∫π
+// 18311: ø’∫π
 #if 0
 #include <bits/stdc++.h>
 #pragma warning(disable:4996)
@@ -3675,6 +3675,48 @@ int main() {
 		}
 	}
 
+
+	return 0;
+}
+
+
+#endif
+
+// 2121: ≥›¿Ã ≥Ó±‚
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	int n, a, b;
+
+	cin >> n >> a >> b;
+
+	set<pair<int, int>> points;
+
+	for (int i = 0; i < n; i++) {
+		int x, y;
+		cin >> x >> y;
+		points.insert(make_pair(x, y));
+	}
+
+	int cnt = 0;
+	for (auto point : points) {
+		int x = point.first;
+		int y = point.second;
+
+		if (points.find({ x + a, y }) == points.end()) continue;
+		if (points.find({ x, y + b }) == points.end()) continue;
+		if (points.find({ x + a, y + b }) == points.end()) continue;
+		cnt++;
+	}
+
+	cout << cnt;
 
 	return 0;
 }
