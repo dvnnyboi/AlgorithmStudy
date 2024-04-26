@@ -3723,3 +3723,45 @@ int main() {
 
 
 #endif
+
+// 15993: 1, 2, 3 ¥ı«œ±‚ 8
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+int dp[100001][2];
+const int MOD = 1000000009;
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+
+	dp[1][0] = 1;
+	dp[2][0] = 1;
+	dp[2][1] = 1;
+	dp[3][0] = 2;
+	dp[3][1] = 2;
+
+	for (int i = 4; i <= 100000; i++) {
+		dp[i][0] = ((dp[i - 1][1] + dp[i - 2][1]) % MOD + dp[i - 3][1]) % MOD;
+		dp[i][1] = ((dp[i - 1][0] + dp[i - 2][0]) % MOD + dp[i - 3][0]) % MOD;
+	}
+
+	int n;
+	cin >> n;
+
+	for (int i = 0; i < n; i++) {
+		int tc;
+		cin >> tc;
+
+		cout << dp[tc][0] << ' ' << dp[tc][1] << '\n';
+	}
+
+
+	return 0;
+}
+
+
+#endif
