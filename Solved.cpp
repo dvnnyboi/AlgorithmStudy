@@ -3765,3 +3765,37 @@ int main() {
 
 
 #endif
+
+// 1010: 다리놓기
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	int t, n, m;
+
+	cin >> t;
+	while (t--) {
+		cin >> n >> m;
+
+		int u = 1;
+		int d = 1;
+		for (int i = m; i > m - n; i--) {
+			u *= i;
+			u /= d;
+			d++;
+		}
+
+		cout << u << '\n';
+	}
+
+	return 0;
+}
+
+
+#endif
