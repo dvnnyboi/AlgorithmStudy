@@ -3799,3 +3799,71 @@ int main() {
 
 
 #endif
+
+// 4963: ¼¶ÀÇ °³¼ö
+#if 0
+#include <bits/stdc++.h>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+
+	int dx[8] = { 0, 1, 1, 1, 0, -1, -1, -1 };
+	int dy[8] = { 1, 1, 0, -1, -1, -1, 0, 1 };
+
+	int w, h;
+	cin >> w >> h;
+	while (w != 0 && h != 0) {
+		vector<vector<int>> board(h, vector<int>(w, 0));
+		vector<vector<bool>> visited(h, vector<bool>(w, false));
+
+		for (int i = 0; i < h; i++) {
+			for (int j = 0; j < w; j++) {
+				cin >> board[i][j];
+			}
+		}
+
+		int islandCnt = 0;
+		for (int i = 0; i < h; i++) {
+			for (int j = 0; j < w; j++) {
+				if (board[i][j] == 0 || visited[i][j]) continue;
+
+				islandCnt++;
+
+				queue<pair<int, int>> q;
+				q.push({ i, j });
+				visited[i][j] = true;
+
+				while (!q.empty()) {
+					int cx = q.front().first;
+					int cy = q.front().second;
+
+					q.pop();
+					for (int k = 0; k < 8; k++) {
+						int nx = cx + dx[k];
+						int ny = cy + dy[k];
+
+						if (nx < 0 || ny < 0 || nx >= h || ny >= w) continue;
+						if (board[nx][ny] == 0 || visited[nx][ny]) continue;
+
+						q.push({ nx, ny });
+						visited[nx][ny] = true;
+
+					}
+				}
+
+			}
+		}
+		cout << islandCnt << '\n';;
+
+		cin >> w >> h;
+	}
+
+	return 0;
+}
+
+
+#endif
